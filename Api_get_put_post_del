@@ -1,0 +1,50 @@
+const express = require('express');
+const app = express();
+app.use(express.json());
+app.get('/products', (req, res) => {
+    res.json({
+        "status": "success",
+        "data": [
+            { "id": 1, "name": "abc", "price": 50000 },
+            { "id": 2, "name": "hhj", "price": 50057 },
+            { "id": 3, "name": "jnv", "price": 41230 },
+            { "id": 4, "name": "khan", "price": 487830 }
+        ],
+    })
+});
+
+
+app.get('/products/:id', (req, res) => {
+    const id = req.params.id;
+    res.json({
+        "status": "success",
+        "data": { "id": id, "name": "abc", "price": 50000 },
+        "message": "success"
+    })
+});
+
+app.post('/products', (req, res) => {
+    res.json({
+        "status": "success",
+        "data": { "name": req.body.name, "price": req.body.price },
+        "message": "insert"
+    })
+});
+
+app.put('/products', (req, res) => {
+    res.json({
+        "status": "success",
+        "data": { "id": req.body.id, "name": req.body.name, "price": req.body.price },
+        "message": "update"
+    })
+});
+app.delete('/products', (req, res) => {
+    res.json({
+        "status": "success",
+        "data": { "id": req.body.id },
+        "message": "delete"
+    })
+});
+
+
+app.listen(5000, () => { console.log(`running in 5000`); })
